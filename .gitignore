@@ -1,1 +1,6 @@
-provider.tf
+# ignore all the file under '.terraform' folder
+.terraform
+.terraform.lock.hcl
+
+# ignore other files
+terraform.tfstate.backup
