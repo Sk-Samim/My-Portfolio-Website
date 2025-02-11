@@ -102,6 +102,7 @@ a:hover {
   max-height: 0;
   overflow: hidden;
   transition: all 0.3 ease-in-out;
+  z-index: 1000;
 }
 
 .menu-links a {
@@ -120,6 +121,11 @@ a:hover {
 
 .menu-links.open {
   max-height: 300px;
+}
+
+.hamburger-icon {
+  z-index: 1001;
+  /* Ensure the icon is also above other content */
 }
 
 .hamburger-icon.open span:first-child {
@@ -429,4 +435,136 @@ footer {
 
 footer p {
   text-align: center;
+}
+
+/* ---------------------------------------------------------- */
+/* For the resume preview section */
+#resume-preview {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+#resume-preview .title {
+  font-size: 2rem;
+  margin-top: 20px;
+  color: #333;
+}
+
+.resume-card-container {
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.resume-card-container:hover {
+  transform: translateY(-5px);
+}
+
+#pdf-canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------- */
+/* Position the resume card container */
+.resume-card-container {
+  position: relative;
+}
+
+/* Position and style the download icon */
+.download-icon-container {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+/* Style the circular background for the download icon */
+.download-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  transition: background-color 0.8s ease, border-color 0.8s ease;
+}
+
+.download-icon {
+  font-size: 18px;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect: Interchange the circle background and arrow colors*/
+.download-circle:hover {
+  background-color: #081308;
+  border-color: #081308;
+}
+
+.download-circle:hover .download-icon {
+  color: #ffffff;
+}
+
+/* Style for the Resume Image */
+.resume-preview-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* In style.css or your CSS file */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* zoom-in */
+.zoom-in {
+  animation: zoomIn 3s forwards;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* fade-down */
+.fade-down {
+  animation: fadeDown 2s forwards;
+}
+
+@keyframes fadeDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

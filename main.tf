@@ -130,6 +130,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
         forward = "none"
       }
     }
+
+    # TTL settings
+    min_ttl     = 5
+    max_ttl     = 5
+    default_ttl = 5
   }
 
   viewer_certificate {

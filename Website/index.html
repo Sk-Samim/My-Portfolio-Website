@@ -8,6 +8,7 @@
   <title>Sk Samim Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="mediaqueries.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -15,6 +16,7 @@
     <div class="logo">Sk Samim</div>
     <div>
       <ul class="nav-links">
+        <li><a href="#resume-preview">Resume</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#Certifications">Certifications</a></li>
@@ -31,6 +33,7 @@
         <span></span>
       </div>
       <div class="menu-links">
+        <li><a href="#resume-preview" onclick="toggleMenu()">Resume</a></li>
         <li><a href="#about" onclick="toggleMenu()">About</a></li>
         <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
         <li><a href="#Certifications" onclick="toggleMenu()">Certifications</a></li>
@@ -38,7 +41,7 @@
       </div>
     </div>
   </nav>
-  <section id="profile">
+  <section id="profile" class="fade-down">
     <div class="section__pic-container">
       <img src="profile-pic.png" alt="Sk Samim profile picture">
     </div>
@@ -47,7 +50,7 @@
       <h1 class="title">Sk Samim</h1>
       <p class="section__text__p2">Site Reliablity Engineer</p>
       <div class="btn-container">
-        <button class="btn btn-color-2" onclick="window.open('./resume-example.pdf')">
+        <button class="btn btn-color-2" onclick="window.open('resume-example.pdf')">
           Download CV
         </button>
         <button class="btn btn-color-1" onclick="location.href='./#contact'">
@@ -62,6 +65,22 @@
       </div>
     </div>
   </section>
+
+  <section id="resume-preview" class="zoom-in">
+    <p class="section__text__p1">My Professional</p>
+    <h1 class="title">Resume Preview</h1>
+    <div class="resume-card-container">
+      <div class="download-icon-container">
+        <a href="resume-example.pdf" download>
+          <div class="download-circle">
+            <i class="fa fa-arrow-down download-icon"></i>
+          </div>
+        </a>
+      </div>
+      <img src="resume-example-1.png" alt="Resume Preview" class="resume-preview-img">
+    </div>
+  </section>
+
   <section id="about">
     <p class="section__text__p1">Get To Know More</p>
     <h1 class="title">About Me</h1>
@@ -210,9 +229,6 @@
               onclick="location.href='https://www.credly.com/badges/2b8e046b-a0bf-48d6-ac18-fe03fb948a72/'">
               View on Credly
             </button>
-            <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
-              Live Demo
-            </button> -->
           </div>
         </div>
         <div class="details-container color-container">
@@ -225,9 +241,6 @@
               onclick="location.href='https://www.credly.com/badges/4dd954e9-a75d-462c-b090-d1267ceb3374/'">
               View on Credly
             </button>
-            <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
-              Live Demo
-            </button> -->
           </div>
         </div>
         <div class="details-container color-container">
@@ -240,9 +253,6 @@
               onclick="location.href='https://www.credly.com/badges/a8e2f4d4-144f-4871-849c-256e9d404bfd/'">
               View on Credly
             </button>
-            <!-- <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/'">
-              Live Demo
-            </button> -->
           </div>
         </div>
       </div>
@@ -267,6 +277,7 @@
     <nav>
       <div class="nav-links-container">
         <ul class="nav-links">
+          <li><a href="#resume-preview">Resume</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#Certifications">Certifications</a></li>
@@ -274,10 +285,13 @@
         </ul>
       </div>
     </nav>
-    <p>Copyright © 2023 Sk Samim. All Rights Reserved.</p>
+    <p>Copyright © 2025 Sk Samim. All Rights Reserved.</p>
   </footer>
   <script src="script.js"></script>
 
+  <script>
+
+  </script>
 
 </body>
 

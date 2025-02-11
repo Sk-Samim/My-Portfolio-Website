@@ -4,3 +4,5 @@
 
 # ignore other files
 terraform.tfstate.backup
+Website_backup.zip
+settings.json
