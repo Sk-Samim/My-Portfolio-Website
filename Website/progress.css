@@ -1,0 +1,48 @@
+/* Hide default scrollbar */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    width: 0 !important;
+    display: none !important;
+}
+
+body,
+html {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* Progress bar styles */
+#progress-bar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 4px;
+    background: #f1f1f1;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #333, #666);
+    transition: width 0.2s ease-out;
+    background-size: 200% auto;
+    animation: shimmer 2s infinite linear;
+    background: linear-gradient(to right, #2c3e50, #3498db);
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+#progress-bar-container {
+    /* Make it thinner or thicker */
+    height: 2.5px;
+}

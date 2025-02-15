@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sk Samim Portfolio</title>
+  <script src="script.js" defer></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="mediaqueries.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,6 +19,7 @@
       });
     })();
   </script>
+  <link rel="stylesheet" href="progress.css">
 </head>
 
 <body>
@@ -25,9 +27,10 @@
     <div class="logo">Sk Samim</div>
     <div>
       <ul class="nav-links">
+        <li><a href="#profile">Home</a></li>
         <li><a href="#resume-preview">Resume</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a href="#Skills">Skills</a></li>
         <li><a href="#Certifications">Certifications</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -42,22 +45,23 @@
         <span></span>
       </div>
       <div class="menu-links">
-        <li><a href="#resume-preview" onclick="toggleMenu()">Resume</a></li>
-        <li><a href="#about" onclick="toggleMenu()">About</a></li>
-        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-        <li><a href="#Certifications" onclick="toggleMenu()">Certifications</a></li>
-        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        <li style="--i:1"><a href="#profile" onclick="toggleMenu()">Home</a></li>
+        <li style="--i:2"><a href="#resume-preview" onclick="toggleMenu()">Resume</a></li>
+        <li style="--i:3"><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li style="--i:4"><a href="#Skills" onclick="toggleMenu()">Skills</a></li>
+        <li style="--i:5"><a href="#Certifications" onclick="toggleMenu()">Certifications</a></li>
+        <li style="--i:6"><a href="#contact" onclick="toggleMenu()">Contact</a></li>
       </div>
     </div>
   </nav>
-  <section id="profile" class="fade-down">
+  <section id="profile">
     <div class="section__pic-container">
       <img src="profile-pic.png" alt="Sk Samim profile picture">
     </div>
     <div class="section__text">
       <p class="section__text__p1">Hello, I'm</p>
       <h1 class="title">Sk Samim</h1>
-      <p class="section__text__p2">Site Reliablity Engineer</p>
+      <p class="section__text__p2" id="typing-text"></p>
       <div class="btn-container">
         <button class="btn btn-color-2" onclick="window.open('resume-example.pdf')">
           Download CV
@@ -100,7 +104,7 @@
       <div class="about-details-container">
         <div class="about-containers">
           <div class="details-container">
-            <img src="experience.png" alt="Experience icon" class="icon">
+            <img src="experience.png" alt="Skills icon" class="icon">
             <h3>Experience</h3>
             <p>2.5 years <br>Site Reliablity Engineer</p>
           </div>
@@ -112,7 +116,7 @@
         </div>
         <div class="text-container">
           <p>
-            AWS Certified Solutions Architect and SRE with 2.5 years of experience in AWS, Terraform, Linux, managing
+            AWS Certified Solutions Architect and SRE with 2.5 years of Skills in AWS, Terraform, Linux, managing
             100 incidents,
             deploying 50 apps, and ensuring 99% SLA compliance. Automated infrastructure with Terraform, boosting
             efficiency by 30%.
@@ -125,53 +129,46 @@
         </div>
       </div>
     </div>
-    <img src="arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'">
+    <img src="arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#Skills'">
   </section>
-  <section id="experience">
+  <section id="Skills">
     <p class="section__text__p1">Explore My</p>
-    <h1 class="title">Experience</h1>
-    <div class="experience-details-container">
+    <h1 class="title">Skills</h1>
+    <div class="Skills-details-container">
       <div class="about-containers">
         <div class="details-container">
-          <h2 class="experience-sub-title">Site Reliablity Engineer</h2>
+          <h2 class="Skills-sub-title">Site Reliablity Engineer</h2>
           <div class="article-container">
             <article>
-              <img src="checkmark.png" alt="Experience icon" class="icon">
+              <img src="aws-logo.png" alt="AWS logo" class="skill-icon">
               <div>
                 <h3>AWS</h3>
                 <p>Experienced</p>
               </div>
             </article>
             <article>
-              <img src="checkmark.png" alt="Experience icon" class="icon">
+              <img src="terraform-logo.png" alt="Terraform logo" class="skill-icon">
               <div>
                 <h3>Terraform</h3>
                 <p>Experienced</p>
               </div>
             </article>
             <article>
-              <img src="checkmark.png" alt="Experience icon" class="icon">
+              <img src="github-logo.png" alt="GitHub logo" class="skill-icon">
               <div>
                 <h3>Git/GitHub</h3>
                 <p>Experienced</p>
               </div>
             </article>
             <article>
-              <img src="checkmark.png" alt="Experience icon" class="icon">
+              <img src="linux-logo.png" alt="Linux logo" class="skill-icon">
               <div>
                 <h3>Linux</h3>
                 <p>Experienced</p>
               </div>
             </article>
-            <!-- <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>TypeScript</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article> -->
             <article>
-              <img src="checkmark.png" alt="Experience icon" class="icon">
+              <img src="zabbix-logo.png" alt="Zabbix logo" class="skill-icon">
               <div>
                 <h3>Zabbix</h3>
                 <p>Experienced</p>
@@ -180,45 +177,45 @@
           </div>
         </div>
         <!-- <div class="details-container">
-            <h2 class="experience-sub-title">Automation Testing</h2>
-            <div class="article-container">
-              <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>Cypress</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>Cucumber</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>TypeScript</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>GitLab CI/CD</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <img src="checkmark.png" alt="Experience icon" class="icon">
-                <div>
-                  <h3>Jira</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div> -->
+          <h2 class="Skills-sub-title">Automation Testing</h2>
+          <div class="article-container">
+            <article>
+              <img src="cypress-logo.png" alt="Linux logo" class="skill-icon">
+              <div>
+                <h3>Cypress</h3>
+                <p>Experienced</p>
+              </div>
+            </article>
+            <article>
+              <img src="cucumber-logo.png" alt="Linux logo" class="skill-icon">
+              <div>
+                <h3>Cucumber</h3>
+                <p>Experienced</p>
+              </div>
+            </article>
+            <article>
+              <img src="typescript-logo.png" alt="Linux logo" class="skill-icon">
+              <div>
+                <h3>TypeScript</h3>
+                <p>Intermediate</p>
+              </div>
+            </article>
+            <article>
+              <img src="gitlab-logo.png" alt="Linux logo" class="skill-icon">
+              <div>
+                <h3>GitLab CI/CD</h3>
+                <p>Intermediate</p>
+              </div>
+            </article>
+            <article>
+              <img src="jira-logo.png" alt="Linux logo" class="skill-icon">
+              <div>
+                <h3>Jira</h3>
+                <p>Intermediate</p>
+              </div>
+            </article>
+          </div>
+        </div> -->
       </div>
     </div>
     <img src="arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#Certifications'">
@@ -229,7 +226,7 @@
     <div class="certifications-container">
       <div class="certification-item">
         <img src="project-1.png" alt="AWS Certified Solutions Architect - Associate" class="certification-img">
-        <h2 class="experience-sub-title project-title">AWS Certified Solutions Architect - Associate</h2>
+        <h2 class="Skills-sub-title project-title">AWS Certified Solutions Architect - Associate</h2>
         <button class="btn btn-color-2 project-btn"
           onclick="location.href='https://www.credly.com/badges/2b8e046b-a0bf-48d6-ac18-fe03fb948a72/'">
           View on Credly
@@ -237,7 +234,7 @@
       </div>
       <div class="certification-item">
         <img src="project-2.png" alt="AWS Certified Cloud Practitioner" class="certification-img">
-        <h2 class="experience-sub-title project-title">AWS Certified Cloud Practitioner</h2>
+        <h2 class="Skills-sub-title project-title">AWS Certified Cloud Practitioner</h2>
         <button class="btn btn-color-2 project-btn"
           onclick="location.href='https://www.credly.com/badges/4dd954e9-a75d-462c-b090-d1267ceb3374/'">
           View on Credly
@@ -245,7 +242,7 @@
       </div>
       <div class="certification-item">
         <img src="project-3.png" alt="GitHub Foundations" class="certification-img">
-        <h2 class="experience-sub-title project-title">GitHub Foundations</h2>
+        <h2 class="Skills-sub-title project-title">GitHub Foundations</h2>
         <button class="btn btn-color-2 project-btn"
           onclick="location.href='https://www.credly.com/badges/a8e2f4d4-144f-4871-849c-256e9d404bfd/'">
           View on Credly
@@ -263,8 +260,12 @@
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Email" required>
           </div>
-          <input type="text" name="subject" placeholder="Subject" required>
-          <textarea name="message" placeholder="Message" required></textarea>
+          <div class="form-group">
+            <input type="text" name="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Message" required></textarea>
+          </div>
           <button type="submit" class="send-btn">Send Message</button>
         </form>
       </div>
@@ -273,32 +274,51 @@
         <p><i class="fas fa-map-marker-alt"></i> Address: Kolkata, West Bengal, India</p>
         <p><i class="fas fa-phone"></i> Phone: +91-8617290885</p>
         <p><i class="fas fa-envelope"></i> Email: sekhsamim187@gmail.com</p>
-        <p><i class="fas fa-globe"></i> Website: yoursite.com</p>
+        <!-- <p><i class="fas fa-globe"></i> Website: yoursite.com</p> -->
       </div>
     </div>
   </section>
   <footer>
-    <nav>
-      <div class="nav-links-container">
-        <ul class="nav-links">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Sk Samim</h3>
+        <p>Cloud DevOps Engineer specializing in AWS, Infrastructure as Code, and automation.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="quick-links">
+          <li><a href="#profile">Home</a></li>
           <li><a href="#resume-preview">Resume</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
+          <li><a href="#Skills">Skills</a></li>
           <li><a href="#Certifications">Certifications</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-    </nav>
-    <p>Copyright © 2025 Sk Samim. All Rights Reserved.</p>
+
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:sekhsamim187@gmail.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Sk Samim. All rights reserved.</p>
+      <p class="made-with">Made with <span class="heart">❤</span> by Sk Samim</p>
+    </div>
   </footer>
-  <script src="script.js"></script>
-
-  <script>
-
-  </script>
-
-
-
+  <script src="https://unpkg.com/scrollreveal"></script>
 </body>
 
 </html>
