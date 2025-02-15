@@ -64,6 +64,19 @@ resource "aws_s3_bucket_policy" "cloudfront_bucket_policy" {
   })
 }
 
+# Configuring CORS rules for the S3 bucket
+resource "aws_s3_bucket_cors_configuration" "cors" {
+  bucket = aws_s3_bucket.mybucket.id
+
+  cors_rule {
+    allowed_methods = ["GET", "POST", "PUT"]
+    allowed_origins = ["*"]
+    allowed_headers = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+}
+
 # Calling this below module to upload multiple files 
 module "template_files" {
   source   = "hashicorp/dir/template"
@@ -107,6 +120,18 @@ resource "aws_cloudfront_origin_access_control" "OAC" {
   signing_protocol                  = "sigv4"
 }
 
+# # Creating a CloudFront Response Headers Policy for CSP
+# resource "aws_cloudfront_response_headers_policy" "CSP" {
+#   name = "CSP-Policy"
+
+#   security_headers_config {
+#     content_security_policy {
+#       override                = true
+#       content_security_policy = "default-src 'self'; script-src 'self' https://dz9adgl23c8cy.cloudfront.net/script.js"
+#     }
+#   }
+# }
+
 # CloudFront Distribution for HTTPS redirection with OAC
 resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled = true
@@ -118,7 +143,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
+    allowed_methods  = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = "S3-${aws_s3_bucket.mybucket.id}"
 
@@ -126,16 +151,22 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
     forwarded_values {
       query_string = false
+      headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method"]
+
       cookies {
         forward = "none"
       }
     }
+
+    # # Attaching the response headers policy
+    # response_headers_policy_id = aws_cloudfront_response_headers_policy.CSP.id
 
     # TTL settings
     min_ttl     = 5
     max_ttl     = 5
     default_ttl = 5
   }
+
 
   viewer_certificate {
     cloudfront_default_certificate = true # Use CloudFront's default SSL certificate
