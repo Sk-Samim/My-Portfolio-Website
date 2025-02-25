@@ -308,6 +308,19 @@
 
 /* For tablets and smaller devices */
 @media screen and (max-width: 768px) {
+  html {
+    scroll-padding-top: 50px;
+  }
+
+  #profile {
+    padding-top: 50px;
+    min-height: calc(100vh - 50px);
+  }
+
+  section {
+    scroll-margin-top: 50px;
+  }
+
   .contact-container {
     flex-direction: column;
     padding: 1.5rem;
@@ -334,10 +347,51 @@
   .send-btn {
     width: 100%;
   }
+
+  .certifications-container {
+    padding: 10px;
+  }
+
+  section {
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .certifications-container {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 15px;
+    width: auto;
+  }
+
+  .contact-info-container {
+    width: 100%;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  body {
+    padding-top: 50px;
+  }
 }
 
 /* For mobile devices */
 @media screen and (max-width: 480px) {
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  #profile {
+    padding-top: 80px;
+    min-height: calc(100vh - 45px);
+  }
+
+  section {
+    scroll-margin-top: 45px;
+  }
+
   .contact-container {
     width: 95%;
     padding: 1rem;
@@ -353,6 +407,28 @@
   .info-container p {
     font-size: 0.85rem;
     margin: 0.75rem 0;
+  }
+
+  .certifications-container {
+    max-width: 100%;
+    padding: 10px;
+    margin: 0.5rem;
+    width: auto;
+  }
+
+  .certification-item {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .project-title {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    word-wrap: break-word;
+  }
+
+  body {
+    padding-top: 45px;
   }
 }
 
@@ -591,5 +667,11 @@
 
   #Certifications {
     margin-top: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  section {
+    margin: 0 10rem;
   }
 }
