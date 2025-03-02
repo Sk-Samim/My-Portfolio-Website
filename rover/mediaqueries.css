@@ -1,0 +1,245 @@
+/* Large Screens (1200px and above) */
+@media screen and (min-width: 1200px) {
+    .architecture-section {
+        padding: 6rem 4rem;
+    }
+
+    .flow-container {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .component {
+        padding: 2rem;
+    }
+}
+
+/* Medium Screens (992px to 1199px) */
+@media screen and (max-width: 1199px) {
+    .architecture-section {
+        padding: 5rem 3rem;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .flow-container {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    .component {
+        padding: 1.5rem;
+        grid-column: span 1;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+/* Tablet Screens (768px to 991px) */
+@media screen and (max-width: 991px) {
+    .architecture-section {
+        padding: 4rem 2rem;
+    }
+
+    .header h1 {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .flow-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .component {
+        grid-column: span 1;
+        max-width: none;
+        min-width: 200px;
+    }
+
+    .connection {
+        height: 50px;
+        width: 2px;
+        margin: 0 auto;
+    }
+
+    .data-stream {
+        height: 20px;
+        width: 6px;
+        animation: streamDataVertical 2s infinite linear;
+    }
+
+    @keyframes streamDataVertical {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(calc(100% + 20px));
+            opacity: 0.3;
+        }
+    }
+
+    .circuit-node {
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Mobile Landscape (576px to 767px) */
+@media screen and (max-width: 767px) {
+    .architecture-section {
+        padding: 3rem 1.5rem;
+        min-height: auto;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .flow-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .component {
+        margin: 0 auto;
+        width: 100%;
+        min-width: unset;
+    }
+
+    .file-list li,
+    .feature-list li {
+        font-size: 0.9rem;
+    }
+}
+
+/* Mobile Portrait (575px and below) */
+@media screen and (max-width: 575px) {
+    .architecture-section {
+        padding: 2rem 1rem;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .component {
+        padding: 1.2rem;
+        max-width: 100%;
+    }
+
+    .icon-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icon-wrapper i {
+        font-size: 1.2rem;
+    }
+
+    .component h3 {
+        font-size: 1.1rem;
+    }
+
+    .component p {
+        font-size: 0.8rem;
+    }
+
+    .flow-container {
+        max-width: 100%;
+    }
+}
+
+/* Height-based Media Queries */
+@media screen and (max-height: 800px) {
+    .architecture-section {
+        padding: 3rem 2rem;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .architecture-section {
+        padding: 2rem 1rem;
+        min-height: auto;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .architecture-section {
+        background: var(--bg-color);
+    }
+
+    .component {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .arrow-line {
+        background: var(--color-primary);
+    }
+}
+
+/* Print Media Query */
+@media print {
+    .architecture-section {
+        padding: 1cm;
+    }
+
+    .component {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    .icon-wrapper i {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Hover Support */
+@media (hover: hover) {
+    .component:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .component {
+        transition: none;
+    }
+
+    .component:hover {
+        transform: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .flow-container {
+        grid-template-columns: 1fr 0.5fr 1fr 0.5fr 1fr 0.5fr 1fr;
+    }
+}

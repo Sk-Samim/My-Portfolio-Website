@@ -77,11 +77,44 @@ resource "aws_s3_bucket_cors_configuration" "cors" {
   }
 }
 
-# Calling this below module to upload multiple files 
+//Calling this below module to upload multiple files under rover directory
+module "rover_files" {
+  source   = "hashicorp/dir/template"
+  version  = "1.0.2"
+  base_dir = "${path.module}/rover"
+}
+
+//Uploading Rover files to the bucket
+resource "aws_s3_object" "rover_bucket_files" {
+  bucket       = aws_s3_bucket.mybucket.id
+  for_each     = module.rover_files.files
+  key          = "rover/${each.key}" # This maintains the subdirectory structure
+  content_type = each.value.content_type
+  source       = each.value.source_path
+  content      = each.value.content
+  acl          = "private"
+  depends_on   = [aws_s3_bucket_acl.Access-Control]
+  etag         = filemd5(each.value.source_path)
+}
+
+# Calling this below module to upload multiple files under Website directory
 module "template_files" {
   source   = "hashicorp/dir/template"
   version  = "1.0.2"
   base_dir = "${path.module}/Website"
+}
+
+#Uploading Website files to the bucket
+resource "aws_s3_object" "hosting_bucket_files" {
+  bucket       = aws_s3_bucket.mybucket.id
+  for_each     = module.template_files.files
+  key          = each.key
+  content_type = each.value.content_type
+  source       = each.value.source_path
+  content      = each.value.content
+  acl          = "private"
+  depends_on   = [aws_s3_bucket_acl.Access-Control]
+  etag         = filemd5(each.value.source_path) # Re-upload files if content changes
 }
 
 #Configuring static website hosting
@@ -96,19 +129,6 @@ resource "aws_s3_bucket_website_configuration" "website" {
   error_document {
     key = "error.html"
   }
-}
-
-#Uploading files to the bucket
-resource "aws_s3_object" "hosting_bucket_files" {
-  bucket       = aws_s3_bucket.mybucket.id
-  for_each     = module.template_files.files
-  key          = each.key
-  content_type = each.value.content_type
-  source       = each.value.source_path
-  content      = each.value.content
-  acl          = "private"
-  depends_on   = [aws_s3_bucket_acl.Access-Control]
-  etag         = filemd5(each.value.source_path) # Re-upload files if content changes
 }
 
 # Creating Origin Access Control (OAC) for CloudFront to securely access the S3 bucket

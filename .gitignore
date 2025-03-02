@@ -6,9 +6,6 @@
 terraform.tfstate.backup
 Website_backup*.zip
 settings.json
-cucumber-logo.png
-cypress-logo.png
-gitlab-logo.png
-typescript-logo.png
-jira-logo.png
-ansible-logo.png
+architecture.html
+graph
+graph.*

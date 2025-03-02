@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<link rel=" icon" href="./favicon.ico">
+	<title>ui</title>
+	<link rel="stylesheet" href="./chota.min.css">
+	<link rel="stylesheet" href="./style.css">
+	<link href="./css/app.620d0115.css" rel="preload" as="style">
+	<link href="./js/app.c464b443.js" rel="preload" as="script">
+	<link href="./js/chunk-vendors.f533c4a1.js" rel="preload" as="script">
+	<link href="./css/app.620d0115.css" rel="stylesheet">
+	<script type="text/javascript" language="javascript" src="./map.js"></script>
+	<script type="text/javascript" language="javascript" src="./rso.js"></script>
+	<script type="text/javascript" language="javascript" src="./graph.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="stylesheet" href="mediaqueries.css">
+
+<body><noscript><strong>We're sorry but ui doesn't work properly without JavaScript enabled. Please enable it to
+			continue.</strong></noscript>
+
+	<section id="architecture" class="architecture-section">
+		<div class="container">
+			<div class="header">
+				<h1>Portfolio Architecture</h1>
+				<p class="subtitle">&lt;A secure and scalable architecture using AWS services /&gt;</p>
+			</div>
+
+			<div class="architecture-diagram">
+				<div class="flow-container">
+					<div class="component source-component">
+						<div class="icon-wrapper">
+							<i class="fas fa-folder"></i>
+						</div>
+						<h3>Website</h3>
+						<p>Static Assets</p>
+						<ul class="file-list">
+							<li>index.html</li>
+							<li>*.css, *.js</li>
+							<li>images & logos</li>
+						</ul>
+						<div class="glow"></div>
+					</div>
+					<div class="arrow">
+						<div class="arrow-line"></div>
+					</div>
+					<div class="component aws-component">
+						<div class="icon-wrapper aws">
+							<i class="fas fa-database"></i>
+						</div>
+						<h3>S3 Bucket</h3>
+						<p>Private Access</p>
+						<ul class="feature-list">
+							<li>CORS Enabled</li>
+							<li>Website Config</li>
+						</ul>
+						<div class="glow"></div>
+					</div>
+					<div class="arrow">
+						<div class="arrow-line"></div>
+					</div>
+					<div class="component aws-component">
+						<div class="icon-wrapper aws">
+							<i class="fas fa-cloud"></i>
+						</div>
+						<h3>CloudFront</h3>
+						<p>CDN Distribution</p>
+						<ul class="feature-list">
+							<li>HTTPS Only</li>
+							<li>Global Edge</li>
+						</ul>
+						<div class="glow"></div>
+					</div>
+					<div class="arrow">
+						<div class="arrow-line"></div>
+					</div>
+					<div class="component users-component">
+						<div class="icon-wrapper">
+							<i class="fas fa-users"></i>
+						</div>
+						<h3>Users</h3>
+						<p>Global Access</p>
+						<ul class="feature-list">
+							<li>Low Latency</li>
+							<li>Secure Access</li>
+						</ul>
+						<div class="glow"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="app"></div>
+	<script src="./js/chunk-vendors.f533c4a1.js"></script>
+	<script src="./js/app.c464b443.js"></script>
+
+	<style>
+		.architecture-section {
+			padding: 4rem 2rem;
+			background: var(--bg-color);
+			color: var(--font-color);
+			border-bottom: 1px solid var(--color-lightGrey);
+			overflow-x: hidden;
+			overflow-y: auto;
+			width: 100%;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 3rem;
+		}
+
+		.header h1 {
+			font-size: 2.8rem;
+			font-weight: 600;
+			color: var(--color-primary);
+			margin-bottom: 0.5rem;
+		}
+
+		.subtitle {
+			font-family: var(--font-family-mono);
+			color: var(--color-grey);
+			font-size: 1.1rem;
+		}
+
+		.architecture-diagram {
+			background: var(--bg-secondary-color);
+			border-radius: 8px;
+			padding: 2rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.flow-container {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			gap: 1rem;
+			align-items: center;
+		}
+
+		.component {
+			grid-column: span 1;
+			background: var(--bg-color);
+			padding: 1.5rem;
+			border-radius: 8px;
+			text-align: center;
+			transition: all 0.3s ease;
+			border: 1px solid var(--color-lightGrey);
+			position: relative;
+		}
+
+		.component:hover {
+			transform: translateY(-5px);
+			border-color: var(--color-primary);
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		}
+
+		.icon-wrapper {
+			width: 50px;
+			height: 50px;
+			margin: 0 auto 1rem;
+			background: var(--color-primary);
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.icon-wrapper i {
+			font-size: 1.5rem;
+			color: white;
+		}
+
+		.icon-wrapper.aws {
+			background: #FF9900;
+		}
+
+		.component h3 {
+			font-size: 1.2rem;
+			margin: 0.5rem 0;
+			color: var(--font-color);
+		}
+
+		.component p {
+			color: var(--color-grey);
+			font-size: 0.9rem;
+			margin-bottom: 1rem;
+		}
+
+		.file-list,
+		.feature-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			font-size: 0.8rem;
+			color: var(--color-grey);
+			text-align: left;
+		}
+
+		.file-list li,
+		.feature-list li {
+			margin: 0.3rem 0;
+			padding-left: 1rem;
+			position: relative;
+		}
+
+		.file-list li:before,
+		.feature-list li:before {
+			content: '→';
+			position: absolute;
+			left: 0;
+			color: var(--color-primary);
+		}
+
+		.arrow {
+			position: relative;
+			height: 2px;
+			grid-column: span 1;
+			display: flex;
+			align-items: center;
+		}
+
+		.arrow-line {
+			width: 100%;
+			height: 2px;
+			background: var(--color-primary);
+			position: relative;
+		}
+
+		.arrow-line::after {
+			content: '';
+			position: absolute;
+			right: -6px;
+			top: -4px;
+			width: 8px;
+			height: 8px;
+			border-top: 2px solid var(--color-primary);
+			border-right: 2px solid var(--color-primary);
+			transform: rotate(45deg);
+		}
+
+		@media (max-width: 768px) {
+			.flow-container {
+				grid-template-columns: 1fr;
+				gap: 2rem;
+			}
+
+			.arrow {
+				height: 30px;
+				width: 2px;
+				margin: 0 auto;
+			}
+
+			.arrow-line {
+				height: 100%;
+				width: 2px;
+			}
+
+			.arrow-line::after {
+				right: -4px;
+				top: auto;
+				bottom: -6px;
+				transform: rotate(135deg);
+			}
+
+			.component {
+				margin: 0 auto;
+				max-width: 300px;
+			}
+		}
+	</style>
+
+</body>
+
+</html>

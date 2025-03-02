@@ -220,3 +220,70 @@ sr.reveal('.certification-item', {
   mobile: true,
   reset: false     // Resets animation when scrolling back up
 });
+
+// Add these functions if they're not already present
+function showModal() {
+  document.getElementById('architectureModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('architectureModal').style.display = 'none';
+}
+
+// Close modal when clicking outside
+window.onclick = function (event) {
+  const modal = document.getElementById('architectureModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+}
+
+function toggleDialog() {
+  const dialog = document.getElementById('architectureDialog');
+  if (!dialog.open) {
+    dialog.showModal();
+  }
+}
+
+function closeDialog() {
+  const dialog = document.getElementById('architectureDialog');
+  dialog.close();
+}
+
+// Show/hide speech bubble in 2 second intervals with smooth transitions
+document.addEventListener('DOMContentLoaded', function () {
+  const speechBubble = document.querySelector('.speech-bubble');
+  const archButton = document.querySelector('.floating-arch-btn');
+
+  // Add transition styles dynamically
+  speechBubble.style.transition = 'opacity 0.7s ease-in-out, visibility 0.7s ease-in-out';
+
+  // Show speech bubble on button hover
+  archButton.addEventListener('mouseenter', function () {
+    speechBubble.classList.add('visible');
+    // Clear any existing interval when hovering
+    if (window.speechBubbleInterval) {
+      clearInterval(window.speechBubbleInterval);
+    }
+  });
+
+  archButton.addEventListener('mouseleave', function () {
+    speechBubble.classList.remove('visible');
+    // Restart the interval after mouse leaves
+    startSpeechBubbleInterval();
+  });
+
+  // Function to start the interval
+  function startSpeechBubbleInterval() {
+    window.speechBubbleInterval = setInterval(function () {
+      if (speechBubble.classList.contains('visible')) {
+        speechBubble.classList.remove('visible');
+      } else {
+        speechBubble.classList.add('visible');
+      }
+    }, 4000);
+  }
+
+  // Start the initial interval
+  startSpeechBubbleInterval();
+});

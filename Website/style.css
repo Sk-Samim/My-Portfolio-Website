@@ -1111,3 +1111,94 @@ a:hover {
   margin-bottom: 4rem;
   /* Adds space between contact section and footer */
 }
+
+.floating-arch-container {
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.floating-arch-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #666666;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-arch-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.floating-arch-btn i {
+  font-size: 18px;
+  color: white;
+}
+
+.speech-bubble {
+  opacity: 0;
+  visibility: hidden;
+  background: #666666;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-size: 10px;
+  max-width: 125px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px);
+  animation: floatBubble 2s ease-in-out infinite;
+}
+
+.speech-bubble.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  right: 18px;
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: #666666 transparent transparent;
+}
+
+@keyframes floatBubble {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  .floating-arch-btn,
+  .speech-bubble {
+    background: rgb(85, 85, 85);
+  }
+
+  .speech-bubble::after {
+    border-color: rgb(85, 85, 85) transparent transparent;
+  }
+}
