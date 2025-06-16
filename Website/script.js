@@ -287,3 +287,28 @@ document.addEventListener('DOMContentLoaded', function () {
   // Start the initial interval
   startSpeechBubbleInterval();
 });
+
+// ScrollReveal for About Section (staggered)
+if (window.ScrollReveal) {
+  // Image animates from left
+  ScrollReveal().reveal('.about-img-col.sr-about', {
+    origin: 'left',
+    distance: '60px',
+    duration: 1400,
+    opacity: 0,
+    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    reset: false,
+    cleanup: true
+  });
+  // Q&A blocks animate from bottom, staggered
+  ScrollReveal().reveal('.about-qa-block.sr-about', {
+    origin: 'bottom',
+    distance: '60px',
+    duration: 1200,
+    opacity: 0,
+    interval: 220,
+    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    reset: false,
+    cleanup: true
+  });
+}
