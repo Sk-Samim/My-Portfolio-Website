@@ -3,44 +3,19 @@ name: Portfolio Infra + Deploy
 on:
   push:
     branches: [GitHub-Actions-Integration]
-    
+
 permissions:
   id-token: write    # required for OIDC
   contents: read
 
 jobs:
-  detect-changes:
-    runs-on: ubuntu-latest
-    outputs:
-      tf_changed: ${{ steps.filter.outputs.tf }}
-      website_changed: ${{ steps.filter.outputs.website }}
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Detect Changes
-        id: filter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            tf:
-              - 'Infra/**/*.tf'
-            website:
-              - 'Website/**'
-
-      - name: Debug Filter Output
-        run: |
-          echo "TF Changed -> ${{ steps.filter.outputs.tf }}"
-          echo "Website Changed -> ${{ steps.filter.outputs.website }}"
-          echo "Files changed:"
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
-
   deploy-infra:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.tf_changed == 'true'
+    if: |
+      contains(join(github.event.commits.*.modified, ','), 'Infra/') ||
+      contains(join(github.event.commits.*.added, ','), 'Infra/') ||
+      contains(join(github.event.commits.*.removed, ','), 'Infra/')
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: ./Infra
@@ -48,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # NOTE:
+      # Note: 
       # Before using aws-actions/configure-aws-credentials@v4 with OIDC,
       # you must add GitHub as an OpenID Connect provider in AWS IAM.
       # Provider URL: https://token.actions.githubusercontent.com
@@ -83,8 +58,10 @@ jobs:
         run: terraform apply -auto-approve tfplan
 
   deploy-website:
-    needs: detect-changes
-    if: needs.detect-changes.outputs.website_changed == 'true'
+    if: |
+      contains(join(github.event.commits.*.modified, ','), 'Website/') ||
+      contains(join(github.event.commits.*.added, ','), 'Website/') ||
+      contains(join(github.event.commits.*.removed, ','), 'Website/')
     runs-on: ubuntu-latest
 
     steps:
