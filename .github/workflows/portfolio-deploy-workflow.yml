@@ -32,6 +32,13 @@ jobs:
             website:
               - 'Website/**'
 
+      - name: Debug Filter Output
+        run: |
+          echo "TF Changed -> ${{ steps.filter.outputs.tf }}"
+          echo "Website Changed -> ${{ steps.filter.outputs.website }}"
+          echo "Files changes:"
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+
   deploy-infra:
     needs: detect-changes
     if: needs.detect-changes.outputs.tf_changed == 'true'
