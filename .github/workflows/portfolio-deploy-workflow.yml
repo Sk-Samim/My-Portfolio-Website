@@ -16,6 +16,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # NOTE:
+      # Before using aws-actions/configure-aws-credentials@v4 with OIDC,
+      # you must add GitHub as an OpenID Connect provider in AWS IAM.
+      # Go to IAM → Identity Providers → Add Provider
+      # Provider URL: https://token.actions.githubusercontent.com
+      # Audience: sts.amazonaws.com
+      # Also ensure your IAM role trust policy allows sts:AssumeRoleWithWebIdentity.
       - name: Configure AWS Credentials (Assume Role)
         uses: aws-actions/configure-aws-credentials@v4
         with:
