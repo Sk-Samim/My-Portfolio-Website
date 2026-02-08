@@ -3,11 +3,7 @@ name: Portfolio Infra + Deploy
 on:
   push:
     branches: [GitHub-Actions-Integration]
-    paths:
-      - '**/*.tf'
-      - 'Website/**'
-      - '.github/workflows/**'
-
+    
 permissions:
   id-token: write    # required for OIDC
   contents: read
@@ -28,7 +24,7 @@ jobs:
         with:
           filters: |
             tf:
-              - '**/*.tf'
+              - 'Infra/**/*.tf'
             website:
               - 'Website/**'
 
@@ -36,7 +32,7 @@ jobs:
         run: |
           echo "TF Changed -> ${{ steps.filter.outputs.tf }}"
           echo "Website Changed -> ${{ steps.filter.outputs.website }}"
-          echo "Files changes:"
+          echo "Files changed:"
           git diff --name-only ${{ github.event.before }} ${{ github.sha }}
 
   deploy-infra:
