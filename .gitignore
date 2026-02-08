@@ -1,11 +1,10 @@
 # ignore all the file under '.terraform' folder
-.terraform
-.terraform.lock.hcl
+*.terraform*
+*terraform*
 
 # ignore other files
-terraform.tfstate.backup
 Website_backup*.zip
-settings.json
+*.vscode*
 architecture.html
 graph
 graph.*
