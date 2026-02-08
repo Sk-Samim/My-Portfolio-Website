@@ -1,10 +1,6 @@
 # ignore all the file under '.terraform' folder
 *.terraform*
-*terraform*
 
 # ignore other files
 website-backup
 *.vscode*
-architecture.html
-graph
-graph.*
