@@ -3,7 +3,8 @@ resource "aws_s3_bucket" "mybucket" {
   bucket = local.bucket_name
 
   tags = {
-    Name = "Managed-With-Terraform"
+    Name = "portfolio-website-bucket"
+    Type = "Managed-With-Terraform"
   }
 }
 
@@ -77,46 +78,6 @@ resource "aws_s3_bucket_cors_configuration" "cors" {
   }
 }
 
-//Calling this below module to upload multiple files under rover directory
-module "rover_files" {
-  source   = "hashicorp/dir/template"
-  version  = "1.0.2"
-  base_dir = "${path.module}/rover"
-}
-
-//Uploading Rover files to the bucket
-resource "aws_s3_object" "rover_bucket_files" {
-  bucket       = aws_s3_bucket.mybucket.id
-  for_each     = module.rover_files.files
-  key          = "rover/${each.key}" # This maintains the subdirectory structure
-  content_type = each.value.content_type
-  source       = each.value.source_path
-  content      = each.value.content
-  acl          = "private"
-  depends_on   = [aws_s3_bucket_acl.Access-Control]
-  etag         = filemd5(each.value.source_path)
-}
-
-# Calling this below module to upload multiple files under Website directory
-module "template_files" {
-  source   = "hashicorp/dir/template"
-  version  = "1.0.2"
-  base_dir = "${path.module}/Website"
-}
-
-#Uploading Website files to the bucket
-resource "aws_s3_object" "hosting_bucket_files" {
-  bucket       = aws_s3_bucket.mybucket.id
-  for_each     = module.template_files.files
-  key          = each.key
-  content_type = each.value.content_type
-  source       = each.value.source_path
-  content      = each.value.content
-  acl          = "private"
-  depends_on   = [aws_s3_bucket_acl.Access-Control]
-  etag         = filemd5(each.value.source_path) # Re-upload files if content changes
-}
-
 #Configuring static website hosting
 resource "aws_s3_bucket_website_configuration" "website" {
   depends_on = [aws_s3_bucket.mybucket]
@@ -139,18 +100,6 @@ resource "aws_cloudfront_origin_access_control" "OAC" {
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
 }
-
-# # Creating a CloudFront Response Headers Policy for CSP
-# resource "aws_cloudfront_response_headers_policy" "CSP" {
-#   name = "CSP-Policy"
-
-#   security_headers_config {
-#     content_security_policy {
-#       override                = true
-#       content_security_policy = "default-src 'self'; script-src 'self' https://dz9adgl23c8cy.cloudfront.net/script.js"
-#     }
-#   }
-# }
 
 # CloudFront Distribution for HTTPS redirection with OAC
 resource "aws_cloudfront_distribution" "s3_distribution" {

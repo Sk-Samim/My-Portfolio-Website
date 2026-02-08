@@ -3,7 +3,7 @@
 *terraform*
 
 # ignore other files
-Website_backup*.zip
+website-backup
 *.vscode*
 architecture.html
 graph
