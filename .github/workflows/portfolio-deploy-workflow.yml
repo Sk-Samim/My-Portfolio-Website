@@ -54,6 +54,7 @@ jobs:
         run: terraform apply -auto-approve tfplan
 
   deploy-website:
+    needs: deploy-infra
     runs-on: ubuntu-latest
 
     steps:
