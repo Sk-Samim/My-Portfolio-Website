@@ -10,10 +10,6 @@ permissions:
 
 jobs:
   deploy-infra:
-    if: |
-      contains(join(github.event.commits.*.modified, ','), 'Infra/') ||
-      contains(join(github.event.commits.*.added, ','), 'Infra/') ||
-      contains(join(github.event.commits.*.removed, ','), 'Infra/')
     runs-on: ubuntu-latest
 
     defaults:
@@ -58,10 +54,6 @@ jobs:
         run: terraform apply -auto-approve tfplan
 
   deploy-website:
-    if: |
-      contains(join(github.event.commits.*.modified, ','), 'Website/') ||
-      contains(join(github.event.commits.*.added, ','), 'Website/') ||
-      contains(join(github.event.commits.*.removed, ','), 'Website/')
     runs-on: ubuntu-latest
 
     steps:
