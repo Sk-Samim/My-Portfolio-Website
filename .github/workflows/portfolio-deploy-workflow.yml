@@ -43,6 +43,9 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.tf_changed == 'true'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Infra
 
     steps:
       - uses: actions/checkout@v3
