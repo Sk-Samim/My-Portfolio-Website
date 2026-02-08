@@ -1,33 +1,105 @@
-name: Assume AWS Role
+name: Portfolio Infra + Deploy
 
 on:
   push:
     branches: [GitHub-Actions-Integration]
+    paths:
+      - '**/*.tf'
+      - 'Website/**'
+      - '.github/workflows/**'
 
 permissions:
   id-token: write    # required for OIDC
   contents: read
 
 jobs:
-  aws-auth:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      tf_changed: ${{ steps.filter.outputs.tf }}
+      website_changed: ${{ steps.filter.outputs.website }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Detect Changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            tf:
+              - '**/*.tf'
+            website:
+              - 'Website/**'
+
+  deploy-infra:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.tf_changed == 'true'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       # NOTE:
       # Before using aws-actions/configure-aws-credentials@v4 with OIDC,
       # you must add GitHub as an OpenID Connect provider in AWS IAM.
-      # Go to IAM → Identity Providers → Add Provider
       # Provider URL: https://token.actions.githubusercontent.com
       # Audience: sts.amazonaws.com
-      # Also ensure your IAM role trust policy allows sts:AssumeRoleWithWebIdentity.
-      - name: Configure AWS Credentials (Assume Role)
+
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::730335293937:role/github-actions-role
           aws-region: ap-south-1
 
-      - name: Verify AWS Identity
-        run: aws sts get-caller-identity
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: |
+          terraform plan -detailed-exitcode -out=tfplan
+          echo "exitcode=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+        # Exit Codes from `terraform plan -detailed-exitcode`:
+        # 0 = No changes, 1 = Error during planning, 2 = Changes detected
+        # We capture the exit code and only run `terraform apply`
+        # when actual infrastructure changes exist (exit code 2),
+        # preventing unnecessary apply runs.
+      - name: Apply Terraform (Only if changes exist)
+        if: steps.plan.outputs.exitcode == '2'
+        run: terraform apply -auto-approve tfplan
+
+  deploy-website:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.website_changed == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::730335293937:role/github-actions-role
+          aws-region: ap-south-1
+
+      - name: Discover Bucket via Tag
+        id: bucket
+        run: |
+          BUCKET=$(aws resourcegroupstaggingapi get-resources \
+            --tag-filters Key=Name,Values=portfolio-website-bucket \
+            --resource-type-filters s3 \
+            --query "ResourceTagMappingList[0].ResourceARN" \
+            --output text | awk -F ':::' '{print $2}')
+
+          echo "bucket=$BUCKET" >> $GITHUB_OUTPUT
+
+      - name: Upload Website to S3
+        run: |
+          aws s3 sync Website/ s3://${{ steps.bucket.outputs.bucket }} --delete
+
