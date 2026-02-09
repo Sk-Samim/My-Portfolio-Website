@@ -3,6 +3,9 @@ name: Portfolio Infra + Deploy
 on:
   push:
     branches: [GitHub-Actions-Integration]
+    paths:
+      - 'Infra/**'
+      - 'Website/**'
 
 permissions:
   id-token: write    # required for OIDC
